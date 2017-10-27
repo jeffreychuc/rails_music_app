@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
 
-</head>
+<html>
+<form action= "<%=users_url%>" method="post">
+<input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
 <body>
-  <title>Please create an account</title>
-  lol test
+  <h2>Please create an account</h2>
+  <br>
+  <label>Email</label>
+  <input type="text" name="user[email]">
+  <br>
+  <label>Password (6 characters at least)</label>
+  <input type="text" name="user[password]">
+  <br>
+  <input type="submit">
 </body>
 </html>

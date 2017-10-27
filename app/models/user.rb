@@ -12,8 +12,11 @@
 
 class User < ApplicationRecord
   validates :email, :password_digest, :session_token, presence: true
+  # only allows password to be nil or be present, an empty string "" is not nill
+  validates :password, length: {minimum: 6, allow_nil: true}
   # this line runs ensure_session_token after the user is generated
-  after_initalize :ensure_session_token
+  after_initialize :ensure_session_token
+  attr_reader :password
 
   def generate_session_token
     self.session_token = SecureRandom.urlsafe_base64
@@ -26,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def ensure_session_token
-    self.session_token ||= generate_session_tokens
+    self.session_token ||= generate_session_token
     #doesnt need a save because of line under validates
   end
 
@@ -35,8 +38,8 @@ class User < ApplicationRecord
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def find_by_credentials(email, password)
-    user = users.find_by(:email, email)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     return nil if user.nil?
     if BCrpyt::Create(user.password_digest).is_password?(password)
       return user
