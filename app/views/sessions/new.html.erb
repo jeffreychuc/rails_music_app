@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+<form action= "<%=session_url%>" method="post">
+<input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+<body>
+  <h2>Please login to an existing account</h2>
+  <br>
+  <label>Email</label>
+  <input type="text" name="user[email]">
+  <br>
+  <label>Password (6 characters at least)</label>
+  <input type="text" name="user[password]">
+  <br>
+  <input type="submit">
+</body>
+</html>
