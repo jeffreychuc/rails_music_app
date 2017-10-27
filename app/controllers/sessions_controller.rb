@@ -1,18 +1,20 @@
 class SessionsController < ApplicationController
+  before_action :require_logged_in, only: [:destroy]
+  before_action :require_logged_out, only: [:new, :create]
 
   def new
-    @location = "login"
     render :new
   end
 
   def create
-    user = User.find_by_credentials(params[:email], params[:password])
+    # fail
+    user = User.find_by_credentials(params[:user][:email], params[:user][:password])
     if user.nil?
       flash.now[:error] = ["invalid user"]
       render :new
     else
       login!(user)
-      redirect_to user_url
+      redirect_to user_url(user)
     end
   end
 

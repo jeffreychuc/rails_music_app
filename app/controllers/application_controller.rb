@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   def logout!
     current_user.reset_session_token!
     session[:session_token] = nil
-    redirect_to users_url
+    # redirect_to users_url
+    # doesnt need redirect due to before action
   end
 
   def logged_in?
@@ -21,6 +22,15 @@ class ApplicationController < ActionController::Base
     # not current user = true if current_user = nil
     !!current_user
   end
+
+  def require_logged_in
+    redirect_to new_session_url unless logged_in?
+  end
+
+  def require_logged_out
+    redirect_to users_url unless !logged_in?
+  end
+
 
   # current user searches by session token.
   def current_user

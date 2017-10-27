@@ -41,7 +41,7 @@ class User < ApplicationRecord
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     return nil if user.nil?
-    if BCrpyt::Create(user.password_digest).is_password?(password)
+    if BCrypt::Password.new(user.password_digest).is_password?(password)
       return user
     end
   end

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :show]
   # singular resource? why again
   resource :session, only: [:new, :create, :destroy]
+  resources :bands, only: [:index, :create, :new, :update, :destroy]
 end
