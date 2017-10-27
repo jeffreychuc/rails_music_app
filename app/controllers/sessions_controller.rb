@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    @location = "login"
     render :new
   end
 
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy!
+  def destroy
     logout!
     redirect_to new_session_url
   end

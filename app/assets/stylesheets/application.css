@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.login_logout_buttons {
+  display: flex;
+  justify-content: flex-end;
+}

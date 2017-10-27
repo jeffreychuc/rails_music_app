@@ -9,6 +9,21 @@
   </head>
 
   <body>
+    <% if flash[:error] %>
+      <ul>
+      <% flash[:error].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <section class = "login_logout_buttons">
+    <% if current_user %>
+      <%= button_to "logout", session_url, method: :delete %>
+    <% else %>
+      <%= button_to "login to an existing account", new_session_url, method: :get %>
+      <%= button_to "create an account", new_user_url, method: :get %>
+    <% end %>
+  </section>
     <%= yield %>
   </body>
 </html>

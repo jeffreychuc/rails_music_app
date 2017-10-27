@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   def logout!
-    session[:session_token] = nil
     current_user.reset_session_token!
-    redirect_to index_url
+    session[:session_token] = nil
+    redirect_to users_url
   end
 
   def logged_in?
